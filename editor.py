@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+# Functions leading by a underscore is the helper functions.
 import os,csv,sys
 
 
@@ -7,10 +8,10 @@ def _finder():
     files = [f for f in os.listdir('.') if f.lower().endswith('.txt')]
     return files
 
-# modify the source file
-# 1. delete the \n
+# modify the source file and save as middleware
+# 1. delete the trailing \n
 # 2. append a double quote at the end of each line
-# 3. save modified lines in a new file(middleware)
+# 3. save modified lines in a new file(called middleware)
 def _preprcessor(source):
     input_file = open(source, 'r')
     middleware = open('middleware.txt.tmp', 'w')
@@ -18,6 +19,7 @@ def _preprcessor(source):
     # process
     m = 0
     for row in input_file.readlines():
+        # skip the first row
         if m >= 1:
             new_row = row.rstrip() + '"\n' 
             middleware.write(new_row)
@@ -28,12 +30,11 @@ def _preprcessor(source):
     input_file.close()
     middleware.close()
 
-
-# open the 
+# from middleware to new file
+# delete(remove) middleware when process is done.
 def _editor(source, number):
 
     _preprcessor(source)
-    # user_input = raw_input('Input your new voucher number: ')
 
     # open the middleware and read it as csv
     input_file = open('middleware.txt.tmp', 'r')
@@ -66,22 +67,17 @@ def main():
         voucher_no = raw_input('Input your voucher number: ')
 
         for txt_file in txt_files:
-            _preprcessor(txt_file)
-            _editor(txt_file, voucher_no)
-            message = txt_file + ': Process complete!'
-            print message
-
-            # try:
-            #     preprcessor(txt_file)
-            #     editor()
-            #     message = txt_file + ': Process complete!'
-            #     print message
-            # except:
-            #     raw_input('Error')
+            try:
+                _editor(txt_file, voucher_no)
+                message = txt_file + ': Process complete!'
+                print message
+            except:
+                raw_input('Oops, Error')
 
     else: 
-        raw_input('TXT file not found! Press Enter...')
+        raw_input('TXT file not found! Press Enter to quit...')
         sys.exit()
 
 
 if __name__ == '__main__': main()
+
