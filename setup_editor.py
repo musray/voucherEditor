@@ -14,8 +14,7 @@ setup(
     name = "VEditor",
     options = options,
     zipfile=None,
-    console = [{"script": "editor.py"}],  
+    console = [{"script": "editor.py", "icon_resources": [(1, "./icon/icon.ico")]}]
     # windows = [{"script": "convert_gui.py", "icon_resources": [(1, "csv.ico")] }],  
     #windows = [{"script": "convert_gui.py"}],  
-    
     )
