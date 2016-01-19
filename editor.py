@@ -81,5 +81,5 @@ def main():
 
 if __name__ == '__main__': 
     main()
-    raw_input('Done! Press Enter to exit...')
+    raw_input('All done!\nPress Enter to exit...')
 
