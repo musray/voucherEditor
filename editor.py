@@ -72,12 +72,14 @@ def main():
                 message = txt_file + ': Process complete!'
                 print message
             except:
-                raw_input('Oops, Error')
+                raw_input('Oops, Error. Press Enter to exit...')
 
     else: 
-        raw_input('TXT file not found! Press Enter to quit...')
+        raw_input('TXT file not found! Press Enter to exit...')
         sys.exit()
 
 
-if __name__ == '__main__': main()
+if __name__ == '__main__': 
+    main()
+    raw_input('Done! Press Enter to exit...')
 
